@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "big_noodle_titling";
+  src: url("./big_noodle_titling.ttf");
+}

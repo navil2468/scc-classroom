@@ -1,7 +1,11 @@
 module.exports = {
   content: ["./views/**/*.{html,js,ejs}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        noodle: ["big_noodle_titling", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };

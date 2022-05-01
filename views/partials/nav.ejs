@@ -1,6 +1,8 @@
 <nav class="bg-black">
   <div class="flex justify-between items-center h-16">
-    <h2 class="ml-2 text-yellow-400 text-xl font-serif">{ STEEL CITY CLASSROOM }</h2>
+    <h2 class="ml-2 text-yellow-400 font-noodle text-3xl">
+      { STEEL CITY CLASSROOM }
+    </h2>
     <% if(locals.user) { %>
     <div class="flex items-center">
       <img
@@ -10,11 +12,12 @@
         referrerpolicy="no-referrer"
       />
       <p class="text-yellow-400"><%= user.name %></p>
-      <a href="/auth/logout" class="text-stone-50 underline decoration-stone-50 ml-2 mr-4 "
+      <a
+        href="/auth/logout"
+        class="text-stone-50 underline decoration-stone-50 ml-2 mr-4"
         >Log out</a
       >
     </div>
     <% } else { %> <a href="/auth/login">Log in</a> <% } %>
   </div>
 </nav>
-
