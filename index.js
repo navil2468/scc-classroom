@@ -1,20 +1,16 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require("express");
+const path = require("path");
 
+const app = express();
 
-app.set('views', './views')
-app.set('view engine', 'ejs')
+app.set("view engine", "ejs");
+app.use("/static", express.static(path.join(__dirname, "static")));
 
-//sending
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/views/index.html')
-})
+app.get("/", (req, res) => {
+  res.render("pages/index", {});
+});
 
-
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`)
-})
-// Connect 
-
-
+const port = process.env.PORT ?? 3000;
+app.listen(port, () =>
+  console.log(`View the application at http://localhost:${port}`)
+);
