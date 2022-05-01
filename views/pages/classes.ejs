@@ -1,14 +1,14 @@
 <%- include('../partials/head'); %> <%- include('../partials/nav'); %>
 
-<h1 class="m-2 text-3xl font-bold">Your Classes</h1>
-<div class="">
+<h1 class="m-2 text-3xl font-bold place-content-center text-yellow-400 bg-black ">Your Classes</h1>
+<div>
   <% classes.forEach((course) => { %>
-  <div class="m-2 p-2 border-gray-600 border-2 rounded-lg max-w-md h-44">
+  <div class="m-2 p-2 border-gray-600 border-2 rounded-lg max-w-md h-44 bg-black justify-center">
     <div class="mb-2">
-      <h2><%= course.name %></h2>
-      <h2><%= course.day %></h2>
-      <h2><%= course.time %></h2>
-      <h2><%= course.subject %></h2>
+      <h2 class="text-yellow-400 underline decoration-yellow-400"><%= course.name %></h2>
+      <h2 class="text-stone-50"><%= course.day %></h2>
+      <h2 class="text-stone-50"><%= course.time %></h2>
+      <h2 class="text-stone-50"><%= course.subject %></h2>
     </div>
   </div>
   <% }) %>
