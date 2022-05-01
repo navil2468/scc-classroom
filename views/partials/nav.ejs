@@ -1,0 +1,16 @@
+<nav>
+  <h2>{ Steel City Classroom }</h2>
+  <div>
+    <% if(locals.user) { %>
+    <img
+      src="<%= user.profile_pic_link %>"
+      alt="profile picture"
+      referrerpolicy="no-referrer"
+    />
+    <p><%= user.name %></p>
+    <a href="/auth/logout">Log out</a>
+    <% } else { %>
+    <a href="/auth/login">Log in</a>
+    <% } %>
+  </div>
+</nav>
