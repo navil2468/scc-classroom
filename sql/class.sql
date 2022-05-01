@@ -12,3 +12,8 @@ CREATE TABLE class(
 	zoom_link VARCHAR(200),
 	replit_link VARCHAR(200)
 );
+
+CREATE TABLE slide_numbers(
+	subject lang,
+	total_slides SMALLINT
+)
