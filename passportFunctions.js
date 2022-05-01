@@ -24,6 +24,11 @@ passport.deserializeUser(async (email, done) => {
         rows: [user],
       } = await pool.query("SELECT * FROM student WHERE email = $1", [email]);
       done(null, { ...user, accountType: "student" });
+    } else if (user.account_type === "admin") {
+      const {
+        rows: [user],
+      } = await pool.query("SELECT * FROM teacher WHERE email = $1", [email]);
+      done(null, { ...user, accountType: "admin" });
     }
   } catch (err) {
     done(err);
@@ -48,20 +53,22 @@ passport.use(
         console.log("user not registered");
         done("Your email is not registered for Steel City Classroom.", null);
       }
-      await pool.query(
-        `
+
+      if (user.account_type !== "admin") {
+        await pool.query(
+          `
       INSERT INTO ${user.account_type}
       SELECT uuid_generate_v4(), $1, $2, $3
       WHERE NOT EXISTS(SELECT email FROM student WHERE email = $4)
       `,
-        [
-          profile.emails[0].value,
-          profile.displayName,
-          profile.photos[0]?.value,
-          profile.emails[0].value,
-        ]
-      );
-
+          [
+            profile.emails[0].value,
+            profile.displayName,
+            profile.photos[0]?.value,
+            profile.emails[0].value,
+          ]
+        );
+      }
       done(null, user);
     }
   )

@@ -1,0 +1,22 @@
+<%- include('../partials/head'); %> <%- include('../partials/nav'); %>
+
+<h1
+  class="m-2 text-3xl font-bold place-content-center text-yellow-400 bg-black"
+>
+  Feedback
+</h1>
+<div>
+  <% feedback.forEach((lessonFeedback) => { %>
+  <div
+    class="m-2 p-2 border-gray-600 border-2 rounded-lg max-w-md h-44 bg-black justify-center cursor-pointer"
+  >
+    <div class="mb-2">
+      <h2 class="text-yellow-400 underline decoration-yellow-400">
+        <%= String(lessonFeedback.class_date).substring(0,15) %>
+      </h2>
+      <h2 class="text-stone-50">slide <%= lessonFeedback.slide_number %></h2>
+      <p class="text-white"><%= lessonFeedback.message %></p>
+    </div>
+  </div>
+  <% }) %>
+</div>
