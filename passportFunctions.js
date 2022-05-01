@@ -13,13 +13,11 @@ passport.deserializeUser(async (email, done) => {
     } = await pool.query("SELECT account_type FROM accounts WHERE email = $1", [
       email,
     ]);
-    console.log("passport deserialize user email: ", email, user);
 
     if (user.account_type === "teacher") {
       const {
         rows: [user],
       } = await pool.query("SELECT * FROM teacher WHERE email = $1", [email]);
-      console.log("passport deserialize teacher: ", user);
       done(null, { ...user, accountType: "teacher" });
     } else if (user.account_type === "student") {
       const {
@@ -42,15 +40,28 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       const {
         rows: [user],
-      } = await pool.query("SELECT email FROM accounts WHERE email = $1", [
+      } = await pool.query("SELECT * FROM accounts WHERE email = $1", [
         profile.emails[0].value,
       ]);
 
       if (!user) {
+        console.log("user not registered");
         done("Your email is not registered for Steel City Classroom.", null);
       }
+      await pool.query(
+        `
+      INSERT INTO ${user.account_type}
+      SELECT uuid_generate_v4(), $1, $2, $3
+      WHERE NOT EXISTS(SELECT email FROM student WHERE email = $4)
+      `,
+        [
+          profile.emails[0].value,
+          profile.displayName,
+          profile.photos[0]?.value,
+          profile.emails[0].value,
+        ]
+      );
 
-      console.log("passport use email: ", user);
       done(null, user);
     }
   )

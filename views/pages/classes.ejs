@@ -1,0 +1,15 @@
+<%- include('../partials/head'); %>
+
+<h1 class="m-2 text-3xl font-bold">Your Classes</h1>
+<div class="">
+  <% classes.forEach((course) => { %>
+  <div class="m-2 p-2 border-gray-600 border-2 rounded-lg max-w-md h-44">
+    <div class="mb-2">
+      <h2><%= course.name %></h2>
+      <h2><%= course.day %></h2>
+      <h2><%= course.time %></h2>
+      <h2><%= course.subject %></h2>
+    </div>
+  </div>
+  <% }) %>
+</div>
