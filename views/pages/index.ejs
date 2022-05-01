@@ -2,4 +2,12 @@
 <div class="mt-3 ml-3">
   <h1 class="text-3xl font-bold">Steel City Codes Class Platform</h1>
   <a href="#" class="text-blue-600 text-lg underline">Sign in with Google</a>
+  <% rows.forEach((teacher) => { %>
+  <div>
+    <h2><%= teacher.email %></h2>
+    <h2><%= teacher.name %></h2>
+    <h2><%= teacher.school %></h2>
+    <img src="<%= teacher.profile_pic_link %>" />
+  </div>
+  <% }) %>
 </div>
